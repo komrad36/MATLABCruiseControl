@@ -33,7 +33,7 @@ classdef PID < handle
         max_I = 45;
             
         % Max rates of integral term accum. in both neg and pos
-        min_delta_I = -0.08;
+        min_delta_I = -0.1;
         max_delta_I = 0.7;
         
         % Max power changes [W/s]
