@@ -24,9 +24,9 @@ classdef Vehicle < handle
         max_pwr = 149000; % max allowed power @ wheels [kW]
         m = 1542; % [kg]
         g = 9.81; % [m/s^2]
-        A = 2; % [m^2]
-%         c_d = 0.24; % it's a Tesla Model S...
+        A = 2.5; % [m^2]
         c_d = 0.34;
+        % c_d = 0.24; % it's a Tesla Model S...
         rho = 1.2041; % [kg/m^3]
     end %properties
     
@@ -67,14 +67,24 @@ classdef Vehicle < handle
         end %function
         
         function dvdt_nopower = dv_dt_nopower(obj, t, v)
-            dvdt_nopower = (-obj.m*obj.g*dh_dt(obj, t, v) - 0.5*obj.rho*v^3*obj.A*obj.c_d) / (obj.m*v);
+            % prevent ode45() from letting v go negative
+            if v < 0.1
+                dvdt_nopower = 0;
+            else
+                dvdt_nopower = (-obj.m*obj.g*dh_dt(obj, t, v) - 0.5*obj.rho*v^3*obj.A*obj.c_d) / (obj.m*v);
+            end %if
         end %function
         
         % add hills here!
+        % dh/dt of 4 m/s corresponds to 11.5 degrees at 20 m/s,
+        % which is quite a lot for cruise control. 2.5-3 is
+        % a reasonable max
         function dhdt = dh_dt(~, ~, ~)
 %         function dhdt = dh_dt(obj, t, v)
+%             dhdt = 2.5;
+%             dhdt = -0.4;
+%             dhdt = 0.3*sin(t/20) - 0.1;
             dhdt = 0;
-%             dhdt = 0.05*sin(t/5);
         end %function
                 
     end %methods

@@ -15,20 +15,21 @@
 % This controller is optimized for normal car speeds, i.e. < 50 m/s.
 % Of course, the controller may perform suboptimally far above this.
 
-V_init = 13; % initial velocity [m/s]
+V_init = 25; % initial velocity [m/s]
 font_size = 18; % [pt]
 h_physics = 0.05; % physics time step [s]
 physics_ticks_per_control_tick = 4; % call PID every x physics ticks
 T_max = 200; % end time [s]
 
 % PID gains:
-K_P = 18000;    % proportional gain
-K_I = 950;      % integral gain
+K_P = 22000;    % proportional gain
+K_I = 2200;      % integral gain
 K_D = 0;        % derivative gain
 
 numTicks = floor(T_max/h_physics);
 % ------adjust this array to configure setpoints as desired------
 % set_points = [V_init*ones(1, floor(numTicks/4)), 15*ones(1, floor(numTicks/7)), 29*ones(1, floor(numTicks/4))];
+% set_points = [];
 set_points = [V_init*ones(1, floor(numTicks/9)), 37*ones(1, floor(numTicks/6)), 34*ones(1, floor(numTicks/7)), 25*ones(1, floor(numTicks/3)), 10*ones(1, floor(numTicks/7))];
 if numel(set_points) < numTicks + 1
     set_points = [set_points, 29*ones(1, numTicks + 1 - numel(set_points))];
