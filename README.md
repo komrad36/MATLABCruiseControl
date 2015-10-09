@@ -1,3 +1,5 @@
+# MATLABCruiseControl
+
 MATLABCruiseControl is a modified divorced PID controller applied to car cruise control and accompanying
 physics simulation and visualizations.
 
@@ -11,4 +13,4 @@ There is a Python port also available on my GitHub at https://github.com/komrad3
 The file cruise.m is the run script; the other two are helper modules containing the PID controller
 and the vehicle physics simulator.
 
-Three screenshots in this directory illustrate example MATLAB output and plots of a particular setpoint configuration.
+Three screenshots in this directory illustrate example MATLAB/Octave output and plots of a particular setpoint configuration.
