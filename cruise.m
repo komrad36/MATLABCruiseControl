@@ -69,10 +69,8 @@ for i=1:numTicks+1
 end %for
 
 KW_PER_W = 1e-3;
-figure(1), clf, hold on
-pause(0.1);
-FigurejFrame = get(handle(gcf),'JavaFrame');
-FigurejFrame.setMaximized(true);
+figure('NumberTitle', 'off', 'Name', 'PID Cruise Control - Requested Engine Power', 'units','normalized','outerposition',[0 0 1 1])
+clf, hold on
 set(gca,'FontSize',font_size)
 title({'PID Cruise Control', 'Requested Engine Power'})
 xlabel('Time [s]'), ylabel('Req. Power [kW]')
@@ -80,13 +78,10 @@ max_kw = veh.max_pwr*KW_PER_W;
 plot([min(T), max(T)], [max_kw, max_kw], 'r', 'LineWidth', 1.5)
 plot(T, pwr*KW_PER_W, 'b', 'LineWidth', 1.5)
 ylim([0 veh.max_pwr*KW_PER_W+5])
-pause(0.1);
 legend('Maximum Engine Power', 'Location', 'Best')
 
-figure(2), clf, hold on
-pause(0.1);
-FigurejFrame = get(handle(gcf),'JavaFrame');
-FigurejFrame.setMaximized(true);
+figure('NumberTitle', 'off', 'Name', 'PID Cruise Control - Velocities', 'units','normalized','outerposition',[0 0 1 1])
+clf, hold on
 set(gca,'FontSize',font_size)
 title({'PID Cruise Control', 'Velocities'})
 xlabel('Time [s]'), ylabel('Speed [m/s]')
@@ -94,5 +89,4 @@ plot(T, set_points, 'r')
 plot(T, V, 'b', 'LineWidth', 2)
 plot(T_nopower, V_nopower, 'g', 'LineWidth', 2)
 ylim([0 max(V)+1])
-pause(0.1);
 legend('Set Point', 'Cruise Control', 'Coasting', 'Location', 'Best')
